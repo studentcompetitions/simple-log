@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151006155221) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "work_days", force: :cascade do |t|
     t.integer  "work_month_id", null: false
     t.integer  "absence"
