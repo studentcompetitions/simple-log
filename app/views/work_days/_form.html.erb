@@ -1,0 +1,10 @@
+<%= field_set_tag do %>
+  <%= f.object.date %>
+  <%= f.hidden_field :date %>
+
+  <%= f.label :absence %>
+  <%= f.select :absence, WorkDay.absences.keys, include_blank: true %>
+
+  <%= f.label :hours %>
+  <%= f.text_field :hours %>
+<% end %>

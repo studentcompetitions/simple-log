@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @work_month.name %></h2>
+
+<ul>
+  <% @work_month.work_days.each do |day| %>
+    <li>
+      Absence: <%= day.absence %>, Hours: <%= day.hours %>
+    </li>
+  <% end %>
+</ul>
+
+Sick days: <%= @work_month.sick_days %>
+Vacation days: <%= @work_month.vacation_days %>
+
+<%= link_to 'Edit', edit_work_month_path(@work_month) %> |
+<%= link_to 'Back', work_months_path %>
