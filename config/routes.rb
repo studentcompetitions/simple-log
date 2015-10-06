@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "work_months#new"
   resources :work_months
 
   # The priority is based upon order of creation: first created -> highest priority.

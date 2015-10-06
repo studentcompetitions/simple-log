@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20151006155221) do
 
   create_table "work_months", force: :cascade do |t|
     t.string   "name"
+    t.integer  "year"
+    t.integer  "month"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

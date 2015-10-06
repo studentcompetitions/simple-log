@@ -11,12 +11,17 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :year %>
+  <%= f.hidden_field :month %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
 
-  <%= f.fields_for :work_days do |builder| %>
-    <%= render partial: "work_days/form", locals: { f: builder } %>
-  <% end %>
+  <table>
+    <%= f.fields_for :work_days do |builder| %>
+      <%= render partial: "work_days/form", locals: { f: builder } %>
+    <% end %>
+  </table>
 
   <div class="actions">
     <%= f.submit %>

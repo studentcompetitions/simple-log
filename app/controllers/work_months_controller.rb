@@ -1,10 +1,11 @@
 class WorkMonthsController < ApplicationController
+  before_action :set_month, only: [:index, :show, :new]
   before_action :set_work_month, only: [:show, :edit, :update, :destroy]
 
   # GET /work_months
   # GET /work_months.json
   def index
-    @work_months = WorkMonth.all
+    @work_months = WorkMonth.where(year: @year, month: @month)
   end
 
   # GET /work_months/1
@@ -14,8 +15,13 @@ class WorkMonthsController < ApplicationController
 
   # GET /work_months/new
   def new
-    @work_month = WorkMonth.new
-    @work_month.work_days = (0...31).map { |i| WorkDay.new(date: Date.today.beginning_of_month + i.days) }
+    month_start = Date.new(@year, @month, 1)
+    month_end = month_start.end_of_month
+
+    @work_month = WorkMonth.new(year: @year, month: @month)
+    @work_month.work_days = (month_start..month_end).map do |date|
+      WorkDay.new(date: date, absence: default_absence_status(date))
+    end
   end
 
   # GET /work_months/1/edit
@@ -63,13 +69,31 @@ class WorkMonthsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_work_month
-      @work_month = WorkMonth.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def work_month_params
-      params.require(:work_month).permit(:name, work_days_attributes: [:absence, :hours])
+  def set_month
+    if params[:month].present?
+      @year, @month = params[:month].split("-").map(&:to_i)
+    else
+      @year = Date.today.year
+      @month = Date.today.month
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_work_month
+    @work_month = WorkMonth.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def work_month_params
+    params.require(:work_month).permit(:name, :year, :month, work_days_attributes: [:absence, :hours, :date])
+  end
+
+  def default_absence_status(date)
+    :weekend_or_public_holiday if weekend?(date)
+  end
+
+  def weekend?(date)
+    date.saturday? || date.sunday?
+  end
 end

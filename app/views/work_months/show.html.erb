@@ -1,17 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <h2><%= @work_month.name %></h2>
+<h2><%= "#{@work_month.year}-#{@work_month.month}" %></h2>
 
-<ul>
+<table>
   <% @work_month.work_days.each do |day| %>
-    <li>
-      Absence: <%= day.absence %>, Hours: <%= day.hours %>
-    </li>
+    <tr>
+      <td><%= day.date.strftime("%Y-%m-%d %A") %></td>
+      <td>Hours: <%= day.hours %></td>
+      <td>Absence: <%= day.absence %></td>
+    </tr>
   <% end %>
-</ul>
+</table>
 
-Sick days: <%= @work_month.sick_days %>
-Vacation days: <%= @work_month.vacation_days %>
+<p>Working days: <%= @work_month.working_days %></p>
+<p>Sick: <%= @work_month.sick_days %></p>
+<p>Home with sick child: <%= @work_month.home_with_sick_child_days %></p>
+<p>Vacation: <%= @work_month.vacation_days %></p>
+<p>Parental leave: <%= @work_month.parental_leave_days %></p>
+
 
 <%= link_to 'Edit', edit_work_month_path(@work_month) %> |
 <%= link_to 'Back', work_months_path %>
