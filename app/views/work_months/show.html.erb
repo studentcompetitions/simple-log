@@ -6,7 +6,7 @@
 <table>
   <% @work_month.work_days.each do |day| %>
     <tr>
-      <td><%= day.date.strftime("%Y-%m-%d %A") %></td>
+      <td><%= day.date.strftime("%Y-%m-%d %a") %></td>
       <td>Hours: <%= day.hours %></td>
       <td>Absence: <%= day.absence %></td>
     </tr>
