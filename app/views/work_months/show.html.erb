@@ -7,13 +7,13 @@
   <% @work_month.work_days.each do |day| %>
     <tr>
       <td><%= day.date.strftime("%Y-%m-%d %a") %></td>
-      <td>Hours: <%= day.hours %></td>
       <td>Absence: <%= day.absence %></td>
+      <td>Hours: <%= day.hours %></td>
     </tr>
   <% end %>
 </table>
 
-<p>Working days: <%= @work_month.working_days %></p>
+<p>Hours: <%= @work_month.total_hours %></p>
 <p>Sick: <%= @work_month.sick_days %></p>
 <p>Home with sick child: <%= @work_month.home_with_sick_child_days %></p>
 <p>Vacation: <%= @work_month.vacation_days %></p>

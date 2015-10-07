@@ -23,7 +23,7 @@ class WorkMonth < ActiveRecord::Base
     work_days.where(absence: WorkDay.absences[:parental_leave]).count
   end
 
-  def working_days
-    work_days.where(absence: nil).count
+  def total_hours
+    work_days.where(absence: nil).sum(:hours)
   end
 end

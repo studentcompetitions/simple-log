@@ -20,7 +20,7 @@ class WorkMonthsController < ApplicationController
 
     @work_month = WorkMonth.new(year: @year, month: @month)
     @work_month.work_days = (month_start..month_end).map do |date|
-      WorkDay.new(date: date, absence: default_absence_status(date))
+      WorkDay.new(date: date)
     end
   end
 

@@ -5,12 +5,12 @@
   </td>
 
   <td>
-    <%= f.label :hours %>
-    <%= f.number_field :hours %>
+    <%= f.label :absence %>
+    <%= f.select :absence, WorkDay.absences.keys.map { |key| [key.to_s.humanize, key] }, include_blank: true %>
   </td>
 
   <td>
-    <%= f.label :absence %>
-    <%= f.select :absence, WorkDay.absences.keys.map { |key| [key.to_s.humanize, key] }, include_blank: true %>
+    <%= f.label :hours %>
+    <%= f.number_field :hours %>
   </td>
 </tr>
