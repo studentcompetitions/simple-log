@@ -4,17 +4,17 @@
 <h2><%= "#{@work_month.year}-#{@work_month.month}" %></h2>
 
 <table>
-  <% @work_month.work_days.each do |day| %>
+  <% @work_month.work_days.where.not(absence: nil).each do |day| %>
     <tr>
       <td><%= day.date.strftime("%Y-%m-%d %a") %></td>
-      <td>Absence: <%= day.absence %></td>
-      <td>Hours: <%= day.hours %></td>
+      <td>Absence reason: <%= day.absence %></td>
+      <td>Absence hours: <%= day.hours %></td>
     </tr>
   <% end %>
 </table>
 
-<p>Hours: <%= @work_month.total_hours %></p>
-<p>Sick: <%= @work_month.sick_days %></p>
-<p>Home with sick child: <%= @work_month.home_with_sick_child_days %></p>
-<p>Vacation: <%= @work_month.vacation_days %></p>
-<p>Parental leave: <%= @work_month.parental_leave_days %></p>
+<p>Absence hours: <%= @work_month.total_hours %></p>
+<p>Sick days: <%= @work_month.sick_days %></p>
+<p>Home with sick child days: <%= @work_month.home_with_sick_child_days %></p>
+<p>Vacation days: <%= @work_month.vacation_days %></p>
+<p>Parental leave days: <%= @work_month.parental_leave_days %></p>

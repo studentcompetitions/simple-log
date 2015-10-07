@@ -24,6 +24,6 @@ class WorkMonth < ActiveRecord::Base
   end
 
   def total_hours
-    work_days.where(absence: nil).sum(:hours)
+    work_days.where.not(absence: nil).sum(:hours)
   end
 end

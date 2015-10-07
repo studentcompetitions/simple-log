@@ -4,4 +4,11 @@ class WorkDay < ActiveRecord::Base
   belongs_to :work_month
 
   validates :date, presence: true
+  validates :hours, numericality: { less_than_or_equal_to: 8 }, if: :hours_present?
+
+  private
+
+  def hours_present?
+    hours.present?
+  end
 end
