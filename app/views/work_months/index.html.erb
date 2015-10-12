@@ -6,16 +6,18 @@
   <p>Total: <%= "#{@work_months.count} #{'person'.pluralize(@work_months.count)}" %> </p>
 </div>
 
-<% @work_months.each do |work_month| %>
-  <div class="row">
-    <div class="col-md-1 col-md-offset-3">
-      <b><%= work_month.name %></b>
-    </div>
-    <div class="col-md-3">
-      Absence: <%= work_month.absence_days %> days, <%= work_month.absence_hours %> hours
-    </div>
-    <div class="col-md-2">
-      <%= link_to "See Details", work_month %>
-    </div>
-  </div>
-<% end %>
+<table class="table">
+  <% @work_months.each do |work_month| %>
+    <tr class="row">
+      <td class="col-md-3 col-md-offset-2">
+        <b><%= work_month.name %></b>
+      </td>
+      <td class="col-md-3">
+        Absence: <%= work_month.absence_days %> days, <%= work_month.absence_hours %> hours
+      </td>
+      <td class="col-md-2">
+        <%= link_to "See Details", work_month %>
+      </td>
+    </tr>
+  <% end %>
+</table>

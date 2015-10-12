@@ -5,21 +5,23 @@
   <h2><%= "#{@work_month.year}-#{@work_month.month}" %></h2>
 </div>
 
-<% @work_month.work_days.where.not(absence: nil).each do |day| %>
-  <div class="row">
-    <div class="col-md-3 col-md-offset-1">
-      <%= day.date.strftime("%Y-%m-%d %A") %>
-    </div>
-    <div class="col-md-4">
-      <td>Absence reason: <%= day.absence.humanize %></td>
-    </div>
-    <div class="col-md-3">
-      <td>Absence hours: <%= day.hours %></td>
-    </div>
-  </div>
-<% end %>
+<table class="table">
+  <% @work_month.work_days.where.not(absence: nil).each do |day| %>
+    <tr class="row">
+      <td class="col-md-3 col-md-offset-1">
+        <%= day.date.strftime("%Y-%m-%d %A") %>
+      </td>
+      <td class="col-md-4">
+        Absence reason: <%= day.absence.humanize %>
+      </td>
+      <td class="col-md-3">
+        Absence hours: <%= day.hours %>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
-<hr>
+<hr/>
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4">Absence: <%= @work_month.absence_days %> days, <%= @work_month.absence_hours %> hours</div>

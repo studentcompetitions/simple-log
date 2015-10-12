@@ -21,11 +21,11 @@
     </div>
   </div>
 
-  <hr>
-
-  <%= f.fields_for :work_days do |builder| %>
-    <%= render partial: "work_days/form", locals: { f: builder } %>
-  <% end %>
+  <table class="table">
+    <%= f.fields_for :work_days do |builder| %>
+      <%= render partial: "work_days/form", locals: { f: builder } %>
+    <% end %>
+  </table>
 
   <div class="row">
     <div class="col-md-3 col-centered">

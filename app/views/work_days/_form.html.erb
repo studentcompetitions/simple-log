@@ -1,16 +1,16 @@
-<div class="row">
-  <div class="col-md-2 col-md-offset-1">
+<tr class="row">
+  <td class="col-md-2 col-md-offset-1">
     <%= f.object.date.strftime("%Y-%m-%d %a") %>
     <%= f.hidden_field :date %>
-  </div>
+  </td>
 
-  <div class="col-md-4">
+  <td class="col-md-4">
     <%= f.label :absence, "Absence reason" %>
     <%= f.select :absence, WorkDay.absences.keys.map { |key| [key.to_s.humanize, key] }, include_blank: true %>
-  </div>
+  </td>
 
-  <div class="col-md-4">
+  <td class="col-md-4">
     <%= f.label :hours, "Absence hours" %>
     <%= f.number_field :hours %>
-  </div>
-</div>
+  </td>
+</tr>
