@@ -5,6 +5,8 @@ class WorkDay < ActiveRecord::Base
 
   validates :date, presence: true
   validates :hours, numericality: { less_than_or_equal_to: 8 }, if: :hours_present?
+  validates :absence, presence: true, if: :hours_present?
+  validates :hours, presence: true, if: :absence?
 
   private
 
