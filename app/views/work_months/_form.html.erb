@@ -1,10 +1,6 @@
-<p>
-  Note: On a specific day, you cannot log more than 8 hours. Vacation leave and parental leave should always be an entire day, which is 8 hours.
-</p>
-
 <%= form_for(@work_month) do |f| %>
   <% if @work_month.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="col-md-6 col-md-offset-3">
       <h2><%= pluralize(@work_month.errors.count, "error") %> prohibited this work_month from being saved:</h2>
 
       <ul>
@@ -18,16 +14,22 @@
   <%= f.hidden_field :year %>
   <%= f.hidden_field :month %>
 
-  <%= f.label :name, "Who are you?" %>
-  <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= f.label :name, "Who are you?" %>
+      <%= f.text_field :name %>
+    </div>
+  </div>
 
-  <table>
-    <%= f.fields_for :work_days do |builder| %>
-      <%= render partial: "work_days/form", locals: { f: builder } %>
-    <% end %>
-  </table>
+  <hr>
 
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.fields_for :work_days do |builder| %>
+    <%= render partial: "work_days/form", locals: { f: builder } %>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-3 col-centered">
+      <%= f.submit class: "btn btn-lg btn-success" %>
+    </div>
   </div>
 <% end %>

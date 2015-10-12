@@ -8,22 +8,32 @@ class WorkMonth < ActiveRecord::Base
   validates :month, presence: true
 
   def sick_days
-    work_days.where(absence: WorkDay.absences[:sick]).count
+    work_days_array.count { |d| d.absence == "sick" }
   end
 
   def vacation_days
-    work_days.where(absence: WorkDay.absences[:vacation]).count
+    work_days_array.count { |d| d.absence == "vacation" }
   end
 
   def home_with_sick_child_days
-    work_days.where(absence: WorkDay.absences[:home_with_sick_child]).count
+    work_days_array.count { |d| d.absence == "home_with_sick_child" }
   end
 
   def parental_leave_days
-    work_days.where(absence: WorkDay.absences[:parental_leave]).count
+    work_days_array.count { |d| d.absence == "parental_leave" }
   end
 
-  def total_hours
-    work_days.where.not(absence: nil).sum(:hours)
+  def absence_days
+    work_days_array.count { |d| d.absence.present? }
+  end
+
+  def absence_hours
+    work_days_array.select(&:hours).sum(&:hours)
+  end
+
+  private
+
+  def work_days_array
+    @work_days_array ||= work_days.to_a
   end
 end

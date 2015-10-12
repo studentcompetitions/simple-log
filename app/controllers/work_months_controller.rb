@@ -5,7 +5,7 @@ class WorkMonthsController < ApplicationController
   # GET /work_months
   # GET /work_months.json
   def index
-    @work_months = WorkMonth.where(year: @year, month: @month)
+    @work_months = WorkMonth.includes(:work_days).where(year: @year, month: @month)
   end
 
   # GET /work_months/1
@@ -81,7 +81,7 @@ class WorkMonthsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_work_month
-    @work_month = WorkMonth.find(params[:id])
+    @work_month = WorkMonth.includes(:work_days).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

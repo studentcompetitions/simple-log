@@ -1,5 +1,10 @@
-<h1>New Work Month for <%= "#{@work_month.year}-#{@work_month.month}" %></h1>
+<div class="jumbotron">
+  <h1>New Work Month</h1>
+  <h2>For <%= "#{@work_month.year}-#{@work_month.month}" %></h2>
+
+  <p class="lead">
+    Note: On a specific day, you cannot log more than 8 hours. Vacation leave and parental leave should always be an entire day, which is 8 hours.
+  </p>
+</div>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', work_months_path %>

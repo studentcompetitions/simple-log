@@ -1,20 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @work_month.name %></h2>
-<h2><%= "#{@work_month.year}-#{@work_month.month}" %></h2>
+<div class="jumbotron">
+  <h1><%= @work_month.name %></h1>
+  <h2><%= "#{@work_month.year}-#{@work_month.month}" %></h2>
+</div>
 
-<table>
-  <% @work_month.work_days.where.not(absence: nil).each do |day| %>
-    <tr>
-      <td><%= day.date.strftime("%Y-%m-%d %a") %></td>
-      <td>Absence reason: <%= day.absence %></td>
+<% @work_month.work_days.where.not(absence: nil).each do |day| %>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <%= day.date.strftime("%Y-%m-%d %A") %>
+    </div>
+    <div class="col-md-4">
+      <td>Absence reason: <%= day.absence.humanize %></td>
+    </div>
+    <div class="col-md-3">
       <td>Absence hours: <%= day.hours %></td>
-    </tr>
-  <% end %>
-</table>
+    </div>
+  </div>
+<% end %>
 
-<p>Absence hours: <%= @work_month.total_hours %></p>
-<p>Sick days: <%= @work_month.sick_days %></p>
-<p>Home with sick child days: <%= @work_month.home_with_sick_child_days %></p>
-<p>Vacation days: <%= @work_month.vacation_days %></p>
-<p>Parental leave days: <%= @work_month.parental_leave_days %></p>
+<hr>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">Absence: <%= @work_month.absence_days %> days, <%= @work_month.absence_hours %> hours</div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">Sick: <%= @work_month.sick_days %> days</div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">Home with sick child: <%= @work_month.home_with_sick_child_days %> days</div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">Vacation: <%= @work_month.vacation_days %> days</div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">Parental leave: <%= @work_month.parental_leave_days %> days</div>
+</div>
