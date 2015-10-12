@@ -6,13 +6,13 @@
 </div>
 
 <table class="table">
-  <% @work_month.work_days.where.not(absence: nil).each do |day| %>
+  <% @work_days.each do |day| %>
     <tr class="row">
       <td class="col-md-3 col-md-offset-1">
         <%= day.date.strftime("%Y-%m-%d %A") %>
       </td>
       <td class="col-md-4">
-        Absence reason: <%= day.absence.humanize %>
+        Absence reason: <%= day.absence.try(:humanize) %>
       </td>
       <td class="col-md-3">
         Absence hours: <%= day.hours %>

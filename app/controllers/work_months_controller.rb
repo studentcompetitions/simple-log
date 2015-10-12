@@ -11,6 +11,7 @@ class WorkMonthsController < ApplicationController
   # GET /work_months/1
   # GET /work_months/1.json
   def show
+    @work_days = @work_month.work_days.where("absence IS NOT NULL OR hours IS NOT NULL")
   end
 
   # GET /work_months/new
