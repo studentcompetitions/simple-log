@@ -7,7 +7,7 @@
 
 <table class="table">
   <% @work_days.each do |day| %>
-    <tr class="row">
+    <tr class="row <%= weekend_class(day.date) %>">
       <td class="col-md-3 col-md-offset-1">
         <%= day.date.strftime("%Y-%m-%d %A") %>
       </td>

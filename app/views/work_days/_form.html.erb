@@ -1,4 +1,4 @@
-<tr class="row">
+<tr class="row <%= weekend_class(f.object.date) %>">
   <td class="col-md-2 col-md-offset-1">
     <%= f.object.date.strftime("%Y-%m-%d %a") %>
     <%= f.hidden_field :date %>

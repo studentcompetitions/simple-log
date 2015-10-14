@@ -14,3 +14,7 @@
   float: none;
   margin: 0 auto;
 }
+
+tr.weekend {
+  background-color: rgb(238, 238, 238);
+}
