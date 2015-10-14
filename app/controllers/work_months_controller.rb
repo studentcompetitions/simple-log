@@ -40,7 +40,7 @@ class WorkMonthsController < ApplicationController
 
     respond_to do |format|
       if @work_month.save
-        format.html { redirect_to @work_month, notice: 'Work month was successfully created.' }
+        format.html { redirect_to @work_month, notice: "Your absence was successfully logged." }
         format.json { render :show, status: :created, location: @work_month }
       else
         format.html { render :new }
