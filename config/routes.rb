@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :work_months
+  resources :work_months, only: [:create, :show]
   get "/:month" => "work_months#new"
+  get "/list/:month" => "work_months#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

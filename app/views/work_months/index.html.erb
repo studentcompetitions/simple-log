@@ -13,22 +13,52 @@
   </ul>
 </div>
 
-<table class="table">
-  <% @work_months.each do |work_month| %>
-    <tr class="row">
-      <td class="col-md-3 col-md-offset-2">
-        <b><%= work_month.employee.name %></b>
-      </td>
-      <td class="col-md-3">
-        <% if work_month.has_absence? %>
-          Absence: <%= work_month.absence_days %> days, <%= work_month.absence_hours %> hours
-        <% else %>
-          No absence
-        <% end %>
-      </td>
-      <td class="col-md-2">
-        <%= link_to "See Details", work_month if work_month.has_absence? %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<% @work_months.each do |work_month| %>
+  <div class="panel panel-default work-month">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-3">
+          <b><%= work_month.employee.name %></b>
+        </div>
+        <div class="col-md-3">
+          <% if work_month.has_absence? %>
+            Absence: <%= work_month.absence_days %> days, <%= work_month.absence_hours %> hours
+          <% else %>
+            No absence
+          <% end %>
+        </div>
+        <div class="col-md-3 col-md-offset-3">
+          <%= image_tag "arrow-down.svg", class: "arrow down" %>
+          <%= image_tag "arrow-up.svg", class: "arrow up collapse" %>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col-md-3">Sick: <%= work_month.sick_days %> days</div>
+        <div class="col-md-3">Home with sick child: <%= work_month.home_with_sick_child_days %> days</div>
+        <div class="col-md-3">Vacation: <%= work_month.vacation_days %> days</div>
+        <div class="col-md-3">Parental leave: <%= work_month.parental_leave_days %> days</div>
+      </div>
+
+      <hr>
+
+      <% work_month.work_days.each do |day| %>
+        <div class="row <%= weekend_class(day.date) %>">
+          <div class="col-md-3">
+            <%= day.date.strftime("%Y-%m-%d %A") %>
+          </div>
+          <div class="col-md-3">
+            Absence hours: <%= day.hours %>
+          </div>
+          <div class="col-md-6">
+            Absence reason: <%= day.absence.try(:humanize) %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+

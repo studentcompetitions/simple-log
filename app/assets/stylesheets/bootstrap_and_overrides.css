@@ -15,6 +15,21 @@
   margin: 0 auto;
 }
 
-tr.weekend {
-  background-color: rgb(238, 238, 238);
+tr.weekend, tr.overview {
+  background-color: rgb(245, 245, 245);;
+}
+
+.panel.work-month .panel-heading {
+  cursor: pointer;
+}
+
+.panel.work-month .panel-body {
+  display: none;
+}
+
+.arrow {
+    width: 16px;
+    height: 11px;
+    float: right;
+    margin-top: 5px;
 }

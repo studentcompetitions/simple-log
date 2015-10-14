@@ -15,7 +15,7 @@ class WorkMonthsController < ApplicationController
   # GET /work_months/1
   # GET /work_months/1.json
   def show
-    @work_days = @work_month.work_days.where("absence IS NOT NULL OR hours IS NOT NULL")
+    @work_days = @work_month.work_days
   end
 
   # GET /work_months/new
@@ -27,10 +27,6 @@ class WorkMonthsController < ApplicationController
     @work_month.work_days = (month_start..month_end).map do |date|
       WorkDay.new(date: date)
     end
-  end
-
-  # GET /work_months/1/edit
-  def edit
   end
 
   # POST /work_months
@@ -46,30 +42,6 @@ class WorkMonthsController < ApplicationController
         format.html { render :new }
         format.json { render json: @work_month.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /work_months/1
-  # PATCH/PUT /work_months/1.json
-  def update
-    respond_to do |format|
-      if @work_month.update(work_month_params)
-        format.html { redirect_to @work_month, notice: 'Work month was successfully updated.' }
-        format.json { render :show, status: :ok, location: @work_month }
-      else
-        format.html { render :edit }
-        format.json { render json: @work_month.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /work_months/1
-  # DELETE /work_months/1.json
-  def destroy
-    @work_month.destroy
-    respond_to do |format|
-      format.html { redirect_to work_months_url, notice: 'Work month was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
