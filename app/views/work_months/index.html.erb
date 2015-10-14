@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="jumbotron">
-  <h1>Absence List</h1>
+  <h2>Absence List</h2>
   <h2>For <%= "#{@year}-#{@month}" %></h2>
   <p>Total: <%= "#{@employees_count} #{'person'.pluralize(@employees_count)}" %> </p>
   <p>Reported: <%= "#{@reported_count} #{'person'.pluralize(@reported_count)}" %> </p>
@@ -28,6 +28,7 @@
           <% end %>
         </div>
         <div class="col-md-3 col-md-offset-3">
+          <%= link_to "Delete", work_month, method: :delete, data: { confirm: 'Are you sure?' } %>
           <%= image_tag "arrow-down.svg", class: "arrow down" %>
           <%= image_tag "arrow-up.svg", class: "arrow up collapse" %>
         </div>

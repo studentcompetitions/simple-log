@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :work_months, only: [:create, :show]
+  resources :work_months, only: [:create, :show, :destroy]
   resources :employees
 
-  get "/:month" => "work_months#new"
-  get "/list/:month" => "work_months#index"
+  get "/:month" => "work_months#new", as: :log_absence
+  get "/list/:month" => "work_months#index", as: :list_absence
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

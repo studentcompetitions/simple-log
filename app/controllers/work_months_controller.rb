@@ -45,6 +45,18 @@ class WorkMonthsController < ApplicationController
     end
   end
 
+  def destroy
+    @work_month.destroy
+
+    if referer_action == "index"
+      redirect_path = list_absence_url(month: "#{@work_month.year}-#{@work_month.month}")
+    else
+      redirect_path = log_absence_url(month: "#{@work_month.year}-#{@work_month.month}")
+    end
+
+    redirect_to redirect_path, notice: "Absence was successfully deleted."
+  end
+
   private
 
   def set_month
@@ -72,5 +84,9 @@ class WorkMonthsController < ApplicationController
 
   def weekend?(date)
     date.saturday? || date.sunday?
+  end
+
+  def referer_action
+    Rails.application.routes.recognize_path(request.referer)[:action]
   end
 end
