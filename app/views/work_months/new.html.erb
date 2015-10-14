@@ -2,9 +2,12 @@
   <h1>Log Absence</h1>
   <h2>For <%= "#{@work_month.year}-#{@work_month.month}" %></h2>
 
-  <p class="lead">
-    Note: On a specific day, you cannot log more than 8 hours. Vacation leave and parental leave should always be an entire day, which is 8 hours.
-  </p>
+  <p>Note:</p>
+  <ul>
+    <li>If you have no absence to log, just select your name and click "Finish".</li>
+    <li>On a specific day, you cannot log more than 8 hours.</li>
+    <li>Vacation leave and parental leave should always be an entire day, which is 8 hours.</li>
+  </ul>
 </div>
 
 <%= render 'form' %>
