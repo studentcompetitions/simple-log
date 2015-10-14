@@ -43,6 +43,10 @@ class WorkMonth < ActiveRecord::Base
     work_days_array.select(&:hours).sum(&:hours)
   end
 
+  def has_absence?
+    work_days.any?
+  end
+
   private
 
   def work_days_array

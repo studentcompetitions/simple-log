@@ -5,7 +5,8 @@ class WorkMonthsController < ApplicationController
   # GET /work_months
   # GET /work_months.json
   def index
-    @work_months = WorkMonth.includes(:work_days, :employee).where(year: @year, month: @month)
+    @work_months = WorkMonth.includes(:work_days, :employee).where(year: @year, month: @month).to_a.
+      sort_by { |m| m.has_absence? ? 0 : 1 }
     @reported_count = @work_months.count
     @employees_count = Employee.count
     @missing = Employee.where.not(id: @work_months.map(&:employee_id)).pluck(:name)
