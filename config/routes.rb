@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :work_months, only: [:create, :show]
+  resources :employees
+
   get "/:month" => "work_months#new"
   get "/list/:month" => "work_months#index"
 
