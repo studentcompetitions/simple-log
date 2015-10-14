@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: "work_months#new"
   resources :work_months
+  get "/:month" => "work_months#new"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

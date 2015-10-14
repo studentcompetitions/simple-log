@@ -5,7 +5,10 @@ class WorkMonthsController < ApplicationController
   # GET /work_months
   # GET /work_months.json
   def index
-    @work_months = WorkMonth.includes(:work_days).where(year: @year, month: @month)
+    @work_months = WorkMonth.includes(:work_days, :employee).where(year: @year, month: @month)
+    @reported_count = @work_months.count
+    @employees_count = Employee.count
+    @missing = Employee.where.not(id: @work_months.map(&:employee_id)).pluck(:name)
   end
 
   # GET /work_months/1
@@ -87,7 +90,7 @@ class WorkMonthsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def work_month_params
-    params.require(:work_month).permit(:name, :year, :month, work_days_attributes: [:absence, :hours, :date])
+    params.require(:work_month).permit(:name, :year, :month, :employee_id, work_days_attributes: [:absence, :hours, :date])
   end
 
   def default_absence_status(date)

@@ -3,14 +3,16 @@
 <div class="jumbotron">
   <h1>Absence List</h1>
   <h2>For <%= "#{@year}-#{@month}" %></h2>
-  <p>Total: <%= "#{@work_months.count} #{'person'.pluralize(@work_months.count)}" %> </p>
+  <p>Total: <%= "#{@employees_count} #{'person'.pluralize(@employees_count)}" %> </p>
+  <p>Reported: <%= "#{@reported_count} #{'person'.pluralize(@reported_count)}" %> </p>
+  <p>Missing: <%= @missing.join(", ") %> </p>
 </div>
 
 <table class="table">
   <% @work_months.each do |work_month| %>
     <tr class="row">
       <td class="col-md-3 col-md-offset-2">
-        <b><%= work_month.name %></b>
+        <b><%= work_month.employee.name %></b>
       </td>
       <td class="col-md-3">
         Absence: <%= work_month.absence_days %> days, <%= work_month.absence_hours %> hours

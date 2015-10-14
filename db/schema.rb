@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006155221) do
+ActiveRecord::Schema.define(version: 20151014145443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "work_days", force: :cascade do |t|
     t.integer  "work_month_id", null: false
@@ -25,12 +31,16 @@ ActiveRecord::Schema.define(version: 20151006155221) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "work_days", ["work_month_id"], name: "index_work_days_on_work_month_id", using: :btree
+
   create_table "work_months", force: :cascade do |t|
-    t.string   "name"
     t.integer  "year"
     t.integer  "month"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "employee_id", null: false
   end
+
+  add_index "work_months", ["employee_id"], name: "index_work_months_on_employee_id", using: :btree
 
 end
