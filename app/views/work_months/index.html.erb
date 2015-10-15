@@ -45,7 +45,7 @@
 
       <hr>
 
-      <% work_month.work_days.each do |day| %>
+      <% work_month.work_days.sort_by(&:date).each do |day| %>
         <div class="row <%= weekend_class(day.date) %>">
           <div class="col-md-3">
             <%= day.date.strftime("%Y-%m-%d %A") %>
