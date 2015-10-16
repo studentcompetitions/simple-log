@@ -2,6 +2,8 @@ class WorkMonthsController < ApplicationController
   before_action :set_month, only: [:index, :show, :new]
   before_action :set_work_month, only: [:show, :edit, :update, :destroy]
 
+  http_basic_authenticate_with name: ENV["HTTP_BASIC_AUTH_USERNAME"], password: ENV["HTTP_BASIC_AUTH_PASSWORD"], except: [:new, :create]
+
   # GET /work_months
   # GET /work_months.json
   def index
@@ -34,14 +36,10 @@ class WorkMonthsController < ApplicationController
   def create
     @work_month = WorkMonth.new(work_month_params)
 
-    respond_to do |format|
-      if @work_month.save
-        format.html { redirect_to @work_month, notice: "Your absence was successfully logged." }
-        format.json { render :show, status: :created, location: @work_month }
-      else
-        format.html { render :new }
-        format.json { render json: @work_month.errors, status: :unprocessable_entity }
-      end
+    if @work_month.save
+      render text: "Your absence was successfully logged."
+    else
+      render :new
     end
   end
 
