@@ -1,0 +1,28 @@
+postgres:
+  image: postgres
+  ports:
+    - "5432:5432"
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: foobar
+
+nginx:
+  build: ./deploy_dependencies/nginx
+  ports:
+    - 80:80
+  links:
+    - 'simple-log'
+
+simple-log:
+  build: ./
+  ports:
+    - 3000:3000
+  links:
+    - postgres
+  environment:
+    DATABASE_URL: postgres://postgres:foobar@postgres:5432/simple-log-db
+    RAILS_SERVE_STATIC_FILES: true
+    HTTP_BASIC_AUTH_USERNAME: admin
+    HTTP_BASIC_AUTH_PASSWORD: password
+  container_name:
+    - simple-log
